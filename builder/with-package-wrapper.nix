@@ -34,7 +34,9 @@ in runCommand "${ghc.name}-with-${package.identifier.name}" {
     ${lndir}/bin/lndir -silent ${ghc} $out
 
     # ...and replace package database with the one from target package config.
+    mv ${libDir}/bin .
     rm -rf ${libDir}/*/
+    mv bin ${libDir}
     ln -s ${configFiles}/package.conf.d ${packageCfgDir}
 
     # Wrap compiler executables with correct env variables.
